@@ -108,7 +108,6 @@ export const handleTagImageUpload = (fieldName = "images", maxCount = 10) => {
 
 export const handleTagVideoUpload = (fieldName = "videos", maxCount = 10) => {
   const upload = uploadTagVideos.array(fieldName, maxCount);
-  console.log("aman madarchod", upload);
   return (req, res, next) => {
     upload(req, res, (err) => {
       if (err)
