@@ -2,8 +2,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import rateLimit from "express-rate-limit";
-import helmet from "helmet";
-import morgan from "morgan";
+import helmet from "helmet"; // Helmet in the backend to secure our application by setting safe HTTP response headers, protecting it from common web attacks without writing security logic manually.
+import morgan from "morgan"; // Logging middleware like Morgan is used in the backend to record details of every incoming HTTP request and outgoing response, which helps in debugging, monitoring, security, and performance analysis.
 
 import { detectionRoutes } from "./detection/index.js";
 
@@ -43,7 +43,7 @@ app.use(
 // Body parsing middleware - only for non-file routes
 // Note: File upload routes use multer which handles body parsing
 app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" })); // .ofor parsing application/x-www-form-urlencoded
 
 // Logging middleware
 if (process.env.NODE_ENV === "development") {
@@ -67,7 +67,7 @@ app.get("/health", (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
-
+// Root endpoint
 app.get("/", (req, res) => {
   res.send("Hello");
 });
@@ -78,7 +78,6 @@ app.use("*", (req, res) => {
     message: "Route not found",
   });
 });
-
 // Global error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
